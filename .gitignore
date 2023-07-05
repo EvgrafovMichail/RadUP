@@ -1,4 +1,5 @@
 # VS code Folders
+*.vscode/
 
 # Python Folders
 *venv/
