@@ -3,3 +3,6 @@
 
 # Python Folders
 *venv/
+
+# C++ files
+*.o
