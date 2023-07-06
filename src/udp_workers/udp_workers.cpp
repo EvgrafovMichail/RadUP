@@ -10,25 +10,25 @@ bool should_send_command = true;
 bool should_receive_data = true;
 
 
-void handleCtrlCInCommandThread(int signal)
+void handleCtrlCInCommandWorker(int signal)
 {
     should_send_command = false;
 }
 
 
-void handleCtrlCInServerThread(int signal)
+void handleCtrlCInServerWorker(int signal)
 {
     should_receive_data = false;
 }
 
 
-void startCommandThread(const std::string& server_ip, std::uint16_t port)
+void startCommandWorker(const std::string& server_ip, std::uint16_t port)
 {
     // инициализируем библиотеку для работы с UDP
     WSADATA wsa_data;
     int operation_result;
 
-    std::signal(SIGINT, handleCtrlCInCommandThread);
+    std::signal(SIGINT, handleCtrlCInCommandWorker);
 
     std::cout << "[INFO]: trying to initialize Winsock...\n";
     operation_result = WSAStartup(MAKEWORD(2, 2), &wsa_data);
@@ -121,13 +121,13 @@ void startCommandThread(const std::string& server_ip, std::uint16_t port)
 }
 
 
-void startServerThread(std::uint16_t port)
+void startServerWorker(std::uint16_t port)
 {
     // инициализируем библиотеку для работы с UDP
     WSADATA wsa_data;
     int operation_result;
 
-    std::signal(SIGINT, handleCtrlCInServerThread);
+    std::signal(SIGINT, handleCtrlCInServerWorker);
 
     std::cout << "[INFO]: trying to initialize Winsock...\n";
     operation_result = WSAStartup(MAKEWORD(2, 2), &wsa_data);

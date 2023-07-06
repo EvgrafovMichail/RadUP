@@ -14,8 +14,8 @@ BOOL WINAPI handleCtrlC(DWORD signal)
 {
     if (signal == CTRL_C_EVENT)
     {
-        handleCtrlCInCommandThread(CTRL_C_EVENT);
-        handleCtrlCInServerThread(CTRL_C_EVENT);
+        handleCtrlCInCommandWorker(CTRL_C_EVENT);
+        handleCtrlCInServerWorker(CTRL_C_EVENT);
     }
 
     return TRUE;
@@ -26,8 +26,8 @@ int main()
 {
     SetConsoleCtrlHandler(handleCtrlC, TRUE);
 
-    std::thread thread_command(startCommandThread, "127.0.0.1", 3367);
-    std::thread thread_server(startServerThread, 7203);
+    std::thread thread_command(startCommandWorker, "127.0.0.1", 3367);
+    std::thread thread_server(startServerWorker, 7203);
 
     thread_command.join();
     thread_server.join();

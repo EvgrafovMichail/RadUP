@@ -8,10 +8,10 @@
 
 #define BUFFER_SIZE 1472
 
-void handleCtrlCInCommandThread(int signal);
-void handleCtrlCInServerThread(int signal);
+void handleCtrlCInCommandWorker(int signal);
+void handleCtrlCInServerWorker(int signal);
 
-void startCommandThread(const std::string& server_ip, std::uint16_t port);
-void startServerThread(std::uint16_t port);
+void startCommandWorker(const std::string& server_ip, std::uint16_t port);
+void startServerWorker(std::uint16_t port);
 
 #endif
