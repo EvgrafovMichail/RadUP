@@ -6,3 +6,6 @@
 
 # C++ files
 *.o
+
+# other files
+*data/
