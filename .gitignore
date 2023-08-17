@@ -6,6 +6,7 @@
 
 # C++ files
 *.o
+*.exe
 
 # other files
 *data/
