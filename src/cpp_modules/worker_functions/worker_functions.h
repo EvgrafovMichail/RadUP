@@ -21,7 +21,7 @@ void startPainterWorker(
     std::queue<std::string>& data_queue, std::mutex& data_queue_mutex
 );
 
-bool _save_to_file(const std::string& path_to_file);
+bool _save_to_file(const std::string& path_to_file, const std::string& data);
 
 
 #endif 
