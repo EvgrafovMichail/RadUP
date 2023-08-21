@@ -1,15 +1,18 @@
 #ifndef WORKER_FUNCTIONS
 #define WORKER_FUNCTIONS
 
-#include <Python.h>
 #include <stdint.h>
+#include <cstdlib>
 #include <fstream>
 #include <sstream>
 #include <string>
 #include <queue>
 #include <mutex>
+#include <ctime>
 
 #include "../udp_socket/udp_socket.h"
+
+#define REPORT_AMOUNT 1000
 
 
 void startSpeakerWorker(const std::string& ip, std::uint16_t port);
@@ -20,8 +23,10 @@ void startListenerWorker(
 void startPainterWorker(
     std::queue<std::string>& data_queue, std::mutex& data_queue_mutex
 );
+void startRadarSimulatorWorker(const std::string& ip, std::uint16_t port);
 
-bool _save_to_file(const std::string& path_to_file, const std::string& data);
+bool _writeToFile(const std::string& path_to_file, const std::string& data);
+void _exit();
 
 
 #endif 
