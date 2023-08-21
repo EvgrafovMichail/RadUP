@@ -143,8 +143,19 @@ std::string UDPSocket::receiveData()
         return "";        
     }
 
-    std::string data_received = _buffer;
-    return data_received;
+    std::stringstream data_received;
+    data_received << "[";
+
+    for (int i = 0; i < BUFFER_SIZE; ++i)
+    {
+        data_received << static_cast<int>(_buffer[i]);
+
+        if (i < BUFFER_SIZE - 1)
+            data_received << ", ";
+    }
+
+    data_received << "]";
+    return data_received.str();
 }
 
 
