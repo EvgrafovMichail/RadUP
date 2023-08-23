@@ -43,11 +43,20 @@ void startListenerWorker(
         if (counter == line_amount - 1)
         {
             data_message << "]";
-
             data_queue_mutex.lock();
-            data_queue.push(data_message.str());
-            data_queue_mutex.unlock();
 
+            if (data_queue.size() < QUEUE_SIZE_LIMIT)
+                data_queue.push(data_message.str());
+
+            else
+            {
+                std::cout << "[WARNING]: current radar data wasn't saved ";
+                std::cout << "because queue size reached its limit;\n";
+                std::cout << "[RECOMENDATION]: reduce data data stream or ";
+                std::cout << "improve consumer performance;" << std::endl;
+            }
+                
+            data_queue_mutex.unlock();
             data_message.str("");
         }
 
@@ -83,7 +92,7 @@ void startPainterWorker(
 
         if (data_message.size())
         {
-            path_to_data = "radar_data" + std::to_string(file_id) + ".json";
+            path_to_data = "../tmp/~radar_data" + std::to_string(file_id) + ".json";
             command = command_string + std::to_string(file_id) + " ";
             command += std::to_string(image_id);
 

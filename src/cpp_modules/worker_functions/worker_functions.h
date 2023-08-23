@@ -12,6 +12,9 @@
 
 #include "../udp_socket/udp_socket.h"
 
+#include <windows.h>
+
+#define QUEUE_SIZE_LIMIT 100
 #define REPORT_AMOUNT 1000
 
 
