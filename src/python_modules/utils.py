@@ -38,5 +38,5 @@ def create_image(radar_data: np.ndarray, path_to_image: str) -> None:
         report_size - 1, 255, -1
     )
 
-    image = np.ones_like(circle_mask) *255 - circle_mask + image
+    image = np.ones_like(circle_mask) * 255 - circle_mask + image
     cv.imwrite(path_to_image, image)

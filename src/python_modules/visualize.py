@@ -1,6 +1,9 @@
 try:
+    import datetime
     import sys
     import os
+
+    import requests
 
     from utils import (
         parse_data,
@@ -24,10 +27,18 @@ try:
         radar_data = parse_data(path_to_radar_data)
         create_image(radar_data, path_to_image)
 
+        request_body = {
+            'image_id': sys.argv[-1],
+            'path_to_image': path_to_image,
+            'timestamp': str(datetime.datetime.now())
+        }
+
+        url = "http://127.0.0.1:8000/received_image"
+        requests.post(url, json=request_body)
 
 
     if __name__ == '__main__':
         main()
 
-except KeyboardInterrupt:
+except (KeyboardInterrupt, Exception):
     pass
