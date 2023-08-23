@@ -84,8 +84,3 @@ def _clean_up() -> None:
     for file_pattern in file_patterns:
         for file in glob.glob(file_pattern):
             os.remove(file)
-
-    path_to_tmp = os.path.join('..', 'tmp')
-
-    if os.path.exists(path_to_tmp):
-        os.rmdir(path_to_tmp)
