@@ -2,6 +2,7 @@
 *.vscode/
 
 # Python Folders
+*__pycahce__/
 *venv/
 
 # C++ files

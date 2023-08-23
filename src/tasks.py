@@ -41,6 +41,18 @@ def build(_):
         _clean_up()
 
         print('success')
+        print(
+            '[INFO]: creating folder for temporary objects...',
+            end=' '
+        )
+
+        path_to_tmp = os.path.join('..', 'tmp')
+
+        if not os.path.exists(path_to_tmp):
+            os.mkdir(path_to_tmp)
+
+        print('success')
+
         print(f'\n{"Successfully build":-^80}\n')
 
     except Exception as error:
@@ -67,8 +79,13 @@ def _compile_module(path_to_files: str) -> None:
 
 
 def _clean_up() -> None:
-    file_patterns = ['*.o', '*.json']
+    file_patterns = ['*.o', '../tmp/*.json']
 
     for file_pattern in file_patterns:
         for file in glob.glob(file_pattern):
             os.remove(file)
+
+    path_to_tmp = os.path.join('..', 'tmp')
+
+    if os.path.exists(path_to_tmp):
+        os.rmdir(path_to_tmp)

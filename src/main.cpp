@@ -8,8 +8,19 @@
 #include "cpp_modules/worker_functions/worker_functions.h"
 
 
+BOOL WINAPI handleCtrlC(DWORD signal)
+{
+    if (signal == CTRL_C_EVENT)
+        _exit();
+
+    return TRUE;
+}
+
+
 int main()
 {
+    SetConsoleCtrlHandler(handleCtrlC, TRUE);
+
     std::queue<std::string> data_queue;
     std::mutex data_queue_mutex;
 
@@ -25,4 +36,6 @@ int main()
     speaker.join();
     listener.join();
     painter.join();
+
+    std::system("invoke clean-up");
 }
