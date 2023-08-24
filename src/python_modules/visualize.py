@@ -1,5 +1,4 @@
 try:
-    import datetime
     import sys
     import os
 
@@ -28,9 +27,9 @@ try:
         create_image(radar_data, path_to_image)
 
         request_body = {
-            'image_id': sys.argv[-1],
-            'path_to_image': path_to_image,
-            'timestamp': str(datetime.datetime.now())
+            'radarImage': path_to_image,
+            'roundViewFile': path_to_image,
+            'radioTactId': sys.argv[-1]
         }
 
         url = "http://127.0.0.1:8000/received_image"
